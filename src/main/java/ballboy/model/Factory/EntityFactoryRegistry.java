@@ -32,6 +32,9 @@ public class EntityFactoryRegistry {
             case "oscillating":
                 entityStrategy = new OscillatingMovementStrategy();
                 break;
+            case "horizontal":
+                entityStrategy = new HorizontalMovementStrategy();
+                break;
             case "default":
                 entityStrategy = new NoMovementStrategy();
                 break;

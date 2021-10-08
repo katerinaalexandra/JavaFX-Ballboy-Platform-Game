@@ -1,5 +1,7 @@
 package ballboy.model;
 
+import org.json.simple.JSONObject;
+
 import java.util.List;
 
 public class LevelImpl implements Level {
@@ -8,6 +10,8 @@ public class LevelImpl implements Level {
     public Ballboy hero;
     public Finish finish;
     public String floorColour;
+    public int tick;
+    public JSONObject cloudConfig;
 
     // Entity attributes
     public List<Entity> entities;
@@ -38,6 +42,10 @@ public class LevelImpl implements Level {
         }
     }
 
+    public void cloudSpawner() {
+
+    }
+
     @Override
     public double getFloorHeight() {
         return levelDao.getFloorHeight();
@@ -65,12 +73,16 @@ public class LevelImpl implements Level {
 
     @Override
     public boolean moveLeft() {
-        return false;
+        hero.setXPos(hero.getXPos()-5);
+        System.out.println(hero.getXPos());
+        return true;
     }
 
     @Override
     public boolean moveRight() {
-        return false;
+        hero.setXPos(hero.getXPos()+5);
+        System.out.println(hero.getXPos());
+        return true;
     }
 
     public String getFloorColour() { return floorColour;}

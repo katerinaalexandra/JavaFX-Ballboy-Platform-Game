@@ -9,7 +9,21 @@
       "startingY": 100.0,
       "imagePath": "ch_stand1.png"
     },
-    "Entities": [],
+    "Entities": [{
+      "type": "enemy",
+      "size": "small",
+      "movement": "oscillating",
+      "startingX": 600.0,
+      "startingY" : 50.0,
+      "imagePath": "slimeBa.png"
+    } , {
+      "type": "enemy",
+      "size": "small",
+      "movement": "oscillating",
+      "startingX": 300.0,
+      "startingY" : 300.0,
+      "imagePath": "slimeYb.png"
+    }],
     "Finish" : {
       "type": "finish",
       "movement": "default",
@@ -20,8 +34,8 @@
     "Clouds": {
       "type": "cloud",
       "movement": "cloud",
-      "startingX": 1000.0,
-      "startingY": 100.0,
+      "startingX": 650.0,
+      "startingY": 200.0,
       "cloudVelocity": 3.2,
       "imagePath": "cloud_1.png"
     },

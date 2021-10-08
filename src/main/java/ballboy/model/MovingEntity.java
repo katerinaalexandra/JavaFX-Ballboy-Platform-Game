@@ -81,7 +81,6 @@ public abstract class MovingEntity implements Entity {
     }
 
     public void setYVel(double yVel) {
-        System.out.println("setting yVel");
         this.yVel= yVel;
     }
 

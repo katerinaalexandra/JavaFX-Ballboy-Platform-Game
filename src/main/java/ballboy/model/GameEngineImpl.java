@@ -8,8 +8,9 @@ import org.json.simple.JSONObject;
 public class GameEngineImpl implements GameEngine {
     private JSONObject levelConfig;
 
-    public LevelBuilder currentLevelBuilder;
     public LevelImpl currentLevel;
+    public LevelBuilder currentLevelBuilder;
+    public int tick;
 
     // GameEngineImpl Constructor
     public GameEngineImpl(String config) {
@@ -26,12 +27,13 @@ public class GameEngineImpl implements GameEngine {
 
     @Override
     public void startLevel() {
-        this.currentLevel = new LevelBuilder()
+        this.currentLevelBuilder = new LevelBuilder()
                                     .setLevelDimensions((JSONObject) levelConfig.get("LevelDimensions"))
                                     .setHero((JSONObject) levelConfig.get("Hero"))
                                     .setEntities((JSONArray) levelConfig.get("Entities"))
-                                    .setFinish((JSONObject) levelConfig.get("Finish"))
-                                    .build();
+                                    .setFinish((JSONObject) levelConfig.get("Finish"));
+
+        this.currentLevel = currentLevelBuilder.build();
     }
 
     @Override
@@ -56,6 +58,16 @@ public class GameEngineImpl implements GameEngine {
 
     @Override
     public void tick() {
+        // LevelImpl will handle entity movement strategy as it has DAO
         getCurrentLevel().tick();
+
+        // GameEngine will handle cloud spawning
+        tick++;
+
+        // Refactor this - it doesn't really follow Builder pattern
+        if (tick % 2000 == 0) {
+            currentLevelBuilder.spawnCloud((JSONObject) levelConfig.get("Clouds"));
+            System.out.println(currentLevel.getEntities());
+        }
     }
 }

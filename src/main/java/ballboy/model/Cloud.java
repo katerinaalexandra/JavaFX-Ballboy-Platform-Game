@@ -9,10 +9,12 @@ public class Cloud extends MovingEntity {
 
         this.movementStrategy=movementStrategy;
 
-        this.layer=Layer.BACKGROUND;
+        this.layer=Layer.FOREGROUND;
 
         extractConfig(config);
-        setDimensions(30,30);
+        setDimensions(100,100);
+        System.out.println("Cloud should be at x coordinate " + this.getXPos());
+        System.out.println("Cloud should have this image " + this.getImage());
     }
 
     public void setDimensions(double height, double width) {
@@ -31,6 +33,8 @@ public class Cloud extends MovingEntity {
         this.yPos=(double) config.get("startingY");
 
         this.imagePath=(String) config.get("imagePath");
+
+        this.xVel=(double) config.get("cloudVelocity");
 
     }
 

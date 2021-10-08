@@ -66,6 +66,7 @@ public class GameWindow {
         }
 
         double heroXPos = model.getCurrentLevel().getHeroX();
+        System.out.println(heroXPos);
         heroXPos -= xViewportOffset;
 
         if (heroXPos < VIEWPORT_MARGIN) {
@@ -93,6 +94,7 @@ public class GameWindow {
             }
             if (notFound) {
                 EntityView entityView = new EntityViewImpl(entity);
+                System.out.println(entityView.getNode());
                 entityViews.add(entityView);
                 pane.getChildren().add(entityView.getNode());
             }

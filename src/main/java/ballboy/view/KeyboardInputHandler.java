@@ -34,7 +34,12 @@ class KeyboardInputHandler{
 
     void handlePressed(KeyEvent keyEvent) {
         if (pressedKeys.contains(keyEvent.getCode())) {
-            return;
+            if (keyEvent.getCode().equals(KeyCode.LEFT)) {
+                model.getCurrentLevel().moveLeft();
+            }
+            else if (keyEvent.getCode().equals(KeyCode.RIGHT)) {
+                model.getCurrentLevel().moveRight();
+            }
         }
         pressedKeys.add(keyEvent.getCode());
 
@@ -56,9 +61,9 @@ class KeyboardInputHandler{
         }
 
         if (left) {
-            model.moveLeft();
+            model.getCurrentLevel().moveLeft();
         } else {
-            model.moveRight();
+            model.getCurrentLevel().moveRight();
         }
     }
 
@@ -75,11 +80,11 @@ class KeyboardInputHandler{
         }
 
         if (!(right || left)) {
-            model.dropHeight();
+            model.getCurrentLevel().dropHeight();
         } else if (right) {
-            model.moveRight();
+            model.getCurrentLevel().moveRight();
         } else {
-            model.moveLeft();
+            model.getCurrentLevel().moveLeft();
         }
     }
 }
