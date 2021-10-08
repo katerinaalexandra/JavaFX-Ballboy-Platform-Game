@@ -1,0 +1,61 @@
+package ballboy.model;
+
+import ballboy.ConfigParser;
+import ballboy.model.Builder.LevelBuilder;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
+public class GameEngineImpl implements GameEngine {
+    private JSONObject levelConfig;
+
+    public LevelBuilder currentLevelBuilder;
+    public LevelImpl currentLevel;
+
+    // GameEngineImpl Constructor
+    public GameEngineImpl(String config) {
+        this.levelConfig= new ConfigParser(config).getLevelConfig();
+        // Build level using Builder pattern
+        startLevel();
+        System.out.println(currentLevel.getEntities());
+    }
+
+    @Override
+    public Level getCurrentLevel() {
+        return currentLevel;
+    }
+
+    @Override
+    public void startLevel() {
+        this.currentLevel = new LevelBuilder()
+                                    .setLevelDimensions((JSONObject) levelConfig.get("LevelDimensions"))
+                                    .setHero((JSONObject) levelConfig.get("Hero"))
+                                    .setEntities((JSONArray) levelConfig.get("Entities"))
+                                    .setFinish((JSONObject) levelConfig.get("Finish"))
+                                    .build();
+    }
+
+    @Override
+    public boolean boostHeight() {
+        return false;
+    }
+
+    @Override
+    public boolean dropHeight() {
+        return false;
+    }
+
+    @Override
+    public boolean moveLeft() {
+        return false;
+    }
+
+    @Override
+    public boolean moveRight() {
+        return false;
+    }
+
+    @Override
+    public void tick() {
+        getCurrentLevel().tick();
+    }
+}
