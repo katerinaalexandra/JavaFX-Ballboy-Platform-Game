@@ -18,16 +18,16 @@ public class Ballboy extends MovingEntity {
     public void setDimensionsHero(String size) {
         switch (size) {
             case "small":
-                this.height = 10;
-                this.width = 10;
-                break;
-            case "normal":
                 this.height = 20;
                 this.width = 20;
                 break;
+            case "normal":
+                this.height = 40;
+                this.width = 40;
+                break;
             case "large":
-                this.height = 30;
-                this.width = 30;
+                this.height = 60;
+                this.width = 60;
                 break;
         }
     }

@@ -13,6 +13,7 @@ import java.util.List;
 
 public class GameWindow {
     private final int width;
+    private final int height;
     private Scene scene;
     private Pane pane;
     private GameEngine model;
@@ -21,13 +22,14 @@ public class GameWindow {
 
     private double xViewportOffset = 0.0;
     private double yViewportOffset = 0.0;
-    private static final double VIEWPORT_MARGIN = 280.0;
+    private static final double VIEWPORT_MARGINX = 280.0;
+    private static final double VIEWPORT_MARGINY = 500.0;
 
     public GameWindow(GameEngine model) {
         this.model = model;
 
         this.width = (int) model.getCurrentLevel().getLevelWidth();
-        double height = (int) model.getCurrentLevel().getLevelHeight();
+        this.height = (int) model.getCurrentLevel().getLevelHeight();
 
         pane = new Pane();
         scene = new Scene(pane, width, height);
@@ -69,16 +71,35 @@ public class GameWindow {
         //System.out.println(heroXPos);
         heroXPos -= xViewportOffset;
 
-        if (heroXPos < VIEWPORT_MARGIN) {
+        double heroYPos = model.getCurrentLevel().getHeroY();
+        heroYPos -= yViewportOffset;
+
+        if (heroXPos < VIEWPORT_MARGINX) {
             if (xViewportOffset >= 0) { // Don't go further left than the start of the level
-                xViewportOffset -= VIEWPORT_MARGIN - heroXPos;
+                xViewportOffset -= VIEWPORT_MARGINX - heroXPos;
                 if (xViewportOffset < 0) {
                     xViewportOffset = 0;
                 }
             }
-        } else if (heroXPos > width - VIEWPORT_MARGIN) {
-            xViewportOffset += heroXPos - (width - VIEWPORT_MARGIN);
+        } else if (heroXPos > width - VIEWPORT_MARGINX) {
+            xViewportOffset += heroXPos - (width - VIEWPORT_MARGINX);
         }
+
+        if (heroYPos > VIEWPORT_MARGINY) {
+            if (yViewportOffset >= 0) {
+                yViewportOffset -= heroYPos - VIEWPORT_MARGINY;
+                if (yViewportOffset < 0) {
+                    yViewportOffset=0;
+                }
+            }
+        } else if (heroYPos < height - VIEWPORT_MARGINY) {
+            yViewportOffset += (height - VIEWPORT_MARGINY) - heroYPos;
+        }
+
+        System.out.println(xViewportOffset);
+        System.out.println(yViewportOffset);
+
+
 
         // We'll never move up and down, will we?
         backgroundDrawer.update(xViewportOffset, yViewportOffset);
@@ -88,7 +109,7 @@ public class GameWindow {
             for (EntityView view: entityViews) {
                 if (view.matchesEntity(entity)) {
                     notFound = false;
-                    view.update(xViewportOffset, 0);
+                    view.update(xViewportOffset, yViewportOffset);
                     break;
                 }
             }

@@ -16,18 +16,14 @@ public class HorizontalMovementStrategy implements MovementStrategy {
         double dx=movableEntity.getXVel();
 
         if (dx == 0) {
-            dx+=1;
+            dx+=0.5;
         }
 
-        System.out.println(dx);
         double xPos=movableEntity.getXPos();
-        System.out.println(xPos);
         double difference=0.0;
         if (xPos - (dx*gravity) < 0 ) {
-            System.out.println("helo");
             difference = (dx*gravity)-xPos;
         } else if (xPos - (dx*gravity) > width) {
-            System.out.println("bye");
             difference = (dx*gravity) - xPos;
         }
 

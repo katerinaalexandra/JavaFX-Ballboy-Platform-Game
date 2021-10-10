@@ -38,6 +38,7 @@ public class LevelImpl implements Level {
 
     @Override
     public void tick() {
+        System.out.println(getHeroX());
         for (Entity entity: this.getEntities()) {
             entity.tick(this.levelDao);
 
@@ -65,15 +66,23 @@ public class LevelImpl implements Level {
 
     @Override
     public boolean boostHeight() {
-        double currentAcceleration = hero.getYAcceleration();
-        hero.setYAcceleration(currentAcceleration+1);
+        double currentYVel = hero.getYVel();
+
+        if (currentYVel <= 0) {
+            hero.setYVel(currentYVel-(levelDao.getTimestep()*2));
+        } else {
+            System.out.println("Boost height when bouncing upwards!");
+        }
         return true;
     }
 
     @Override
     public boolean dropHeight() {
-        double currentVel = hero.getYVel();
-        hero.setYVel(currentVel-levelDao.getTimestep());
+        double currentYVel = hero.getYVel();
+        if (currentYVel >= 0) {
+            hero.setYVel(currentYVel-(levelDao.getTimestep()*2));
+        }
+
         return true;
     }
 

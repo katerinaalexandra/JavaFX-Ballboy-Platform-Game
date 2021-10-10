@@ -18,6 +18,7 @@ class KeyboardInputHandler{
     private boolean left = false;
     private boolean right = false;
     private boolean boost = false;
+    private boolean drop = false;
     private Set<KeyCode> pressedKeys = new HashSet<>();
 
     private Map<String, MediaPlayer> sounds = new HashMap<>();
@@ -43,7 +44,9 @@ class KeyboardInputHandler{
                 model.getCurrentLevel().moveRight();
 
             } else if (keyEvent.getCode().equals(KeyCode.UP)) {
-                model.getCurrentLevel().moveRight();
+                model.getCurrentLevel().boostHeight();
+            } else if (keyEvent.getCode().equals(KeyCode.DOWN)) {
+                model.getCurrentLevel().dropHeight();
             }
         }
         pressedKeys.add(keyEvent.getCode());
@@ -63,6 +66,8 @@ class KeyboardInputHandler{
             right = true;
         } else if (keyEvent.getCode().equals(KeyCode.UP)) {
             boost=true;
+        } else if (keyEvent.getCode().equals(KeyCode.DOWN)){
+            drop=true;
         } else {
             return;
         }
@@ -73,6 +78,8 @@ class KeyboardInputHandler{
             model.getCurrentLevel().moveRight();
         } else if (boost) {
             model.getCurrentLevel().boostHeight();
+        } else if (drop) {
+            model.getCurrentLevel().dropHeight();
         }
     }
 
@@ -86,8 +93,10 @@ class KeyboardInputHandler{
         else if (keyEvent.getCode().equals(KeyCode.RIGHT)) {
             right = false;
             ((LevelImpl)model.getCurrentLevel()).resetXVel();
-        } else {
-            return;
+        } else if (keyEvent.getCode().equals(KeyCode.UP)){
+            boost=false;
+        } else if (keyEvent.getCode().equals(KeyCode.DOWN)){
+            drop=false;
         }
 
         if (!(right || left)) {

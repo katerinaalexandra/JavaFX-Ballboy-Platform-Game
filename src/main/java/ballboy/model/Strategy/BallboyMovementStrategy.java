@@ -12,7 +12,7 @@ public class BallboyMovementStrategy implements MovementStrategy {
 
         double timestep = levelDao.getTimestep();
         double floorHeight = levelDao.getFloorHeight();
-        double gravity = levelDao.getGravity();
+        double gravity = levelDao.getGravity() / 1000; // gravity is in m/s and we are working with ticks
 
         // Casting relies on correct 'movement' values in config
         double dy = movableEntity.getYVel();
@@ -25,7 +25,7 @@ public class BallboyMovementStrategy implements MovementStrategy {
         }
 
 
-        movableEntity.setYPos(yPos + (dy*gravity) - difference);
+        movableEntity.setYPos(yPos + dy - difference);
 
 
         if (movableEntity.getYPos() == floorHeight) {
@@ -34,8 +34,6 @@ public class BallboyMovementStrategy implements MovementStrategy {
         }
         movableEntity.setYVel(dy+=timestep);
 
-        System.out.println("yPos is " + movableEntity.getYPos());
-        System.out.println("yVel is " + movableEntity.getYVel());
 
     }
 
@@ -83,8 +81,8 @@ public class BallboyMovementStrategy implements MovementStrategy {
             //System.out.println("top side hit!");
             hero.setYVel(-1*hero.getYVel());
         } else if (hero.getYPos() < lowerBoundY && hero.getYPos() > upperBoundY) {
-            //System.out.println("side hit!");
-            hero.setYVel(-1*hero.getYVel());
+            System.out.println("side hit!");
+            //hero.setYVel(-1*hero.getYVel());
         } else if (hero.getPrevYPos() > lowerBoundY) {
             //System.out.println("bottom hit!");
             hero.setYVel(-1*hero.getYVel());
