@@ -2,12 +2,15 @@ package ballboy.model;
 
 import ballboy.model.Strategy.MovementStrategy;
 import javafx.scene.image.Image;
-import org.json.simple.JSONObject;
 
 public abstract class MovingEntity implements Entity {
     // Static coordinates
     double xPos;
     double yPos;
+
+    // Used for collision strategy
+    double prevXPos;
+    double prevYPos;
 
     double startingX;
     double startingY;
@@ -42,7 +45,7 @@ public abstract class MovingEntity implements Entity {
 
     @Override
     public double getHeight() {
-        return yPos;
+        return height;
     }
 
     @Override
@@ -87,5 +90,13 @@ public abstract class MovingEntity implements Entity {
     public double getStartingX() {return startingX;}
 
     public double getStartingY() {return startingY;}
+
+    public double getPrevXPos() {return prevXPos;}
+
+    public double getPrevYPos() {return prevYPos;}
+
+    public void setPrevXPos(double xPos) {this.prevXPos=xPos;}
+
+    public void setPrevYPos(double yPos) {this.prevYPos=yPos;}
 
 }

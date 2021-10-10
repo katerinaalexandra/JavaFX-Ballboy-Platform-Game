@@ -1,5 +1,6 @@
 package ballboy.view;
 
+import ballboy.model.LevelImpl;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.media.Media;
@@ -16,6 +17,7 @@ class KeyboardInputHandler{
     private final GameEngine model;
     private boolean left = false;
     private boolean right = false;
+    private boolean boost = false;
     private Set<KeyCode> pressedKeys = new HashSet<>();
 
     private Map<String, MediaPlayer> sounds = new HashMap<>();
@@ -39,6 +41,9 @@ class KeyboardInputHandler{
             }
             else if (keyEvent.getCode().equals(KeyCode.RIGHT)) {
                 model.getCurrentLevel().moveRight();
+
+            } else if (keyEvent.getCode().equals(KeyCode.UP)) {
+                model.getCurrentLevel().moveRight();
             }
         }
         pressedKeys.add(keyEvent.getCode());
@@ -56,14 +61,18 @@ class KeyboardInputHandler{
         }
         else if (keyEvent.getCode().equals(KeyCode.RIGHT)) {
             right = true;
+        } else if (keyEvent.getCode().equals(KeyCode.UP)) {
+            boost=true;
         } else {
             return;
         }
 
         if (left) {
             model.getCurrentLevel().moveLeft();
-        } else {
+        } else if (right) {
             model.getCurrentLevel().moveRight();
+        } else if (boost) {
+            model.getCurrentLevel().boostHeight();
         }
     }
 
@@ -72,15 +81,18 @@ class KeyboardInputHandler{
 
         if (keyEvent.getCode().equals(KeyCode.LEFT)) {
             left = false;
+            ((LevelImpl)model.getCurrentLevel()).resetXVel();
         }
         else if (keyEvent.getCode().equals(KeyCode.RIGHT)) {
             right = false;
+            ((LevelImpl)model.getCurrentLevel()).resetXVel();
         } else {
             return;
         }
 
         if (!(right || left)) {
             model.getCurrentLevel().dropHeight();
+
         } else if (right) {
             model.getCurrentLevel().moveRight();
         } else {

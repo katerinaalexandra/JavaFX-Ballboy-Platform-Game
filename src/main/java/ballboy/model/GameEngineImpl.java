@@ -66,8 +66,8 @@ public class GameEngineImpl implements GameEngine {
 
         // Refactor this - it doesn't really follow Builder pattern
         if (tick % 2000 == 0) {
-            currentLevelBuilder.spawnCloud((JSONObject) levelConfig.get("Clouds"));
-            System.out.println(currentLevel.getEntities());
+            //currentLevelBuilder.spawnCloud((JSONObject) levelConfig.get("Clouds"));
+            //System.out.println(currentLevel.getEntities());
         }
     }
 }

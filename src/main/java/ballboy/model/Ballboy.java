@@ -5,6 +5,7 @@ import org.json.simple.JSONObject;
 
 public class Ballboy extends MovingEntity {
     String size;
+    public double yAcceleration=1.0;
 
     public Ballboy(JSONObject config, MovementStrategy movementStrategy) {
         this.movementStrategy=movementStrategy;
@@ -47,7 +48,13 @@ public class Ballboy extends MovingEntity {
         this.yPos=(double) config.get("startingY");
 
         this.imagePath=(String) config.get("imagePath");
-
     }
+
+    public double getYAcceleration() {return yAcceleration;}
+
+    public void setYAcceleration(double yAcceleration) {
+        this.yAcceleration=yAcceleration;
+    }
+
 
 }

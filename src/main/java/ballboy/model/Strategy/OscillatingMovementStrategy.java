@@ -5,6 +5,9 @@ import ballboy.model.GameEngine;
 import ballboy.model.LevelDao;
 import ballboy.model.MovingEntity;
 
+/**
+ *
+ */
 public class OscillatingMovementStrategy implements MovementStrategy {
     @Override
     public void move(Entity entity, LevelDao levelDao) {
@@ -38,6 +41,11 @@ public class OscillatingMovementStrategy implements MovementStrategy {
         movableEntity.setYVel(dy+timestep);
 
         movableEntity.setXPos(xPos-dx);
+
+    }
+
+    @Override
+    public void collide(Entity thisEntity, Entity collisionEntity, LevelDao levelDao) {
 
     }
 }

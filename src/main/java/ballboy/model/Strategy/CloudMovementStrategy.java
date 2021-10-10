@@ -21,4 +21,9 @@ public class CloudMovementStrategy implements MovementStrategy {
         movableEntity.setXPos(movableEntity.getXPos()-displacement);
 
     }
+
+    @Override
+    public void collide(Entity thisEntity, Entity collisionEntity, LevelDao levelDao) {
+
+    }
 }

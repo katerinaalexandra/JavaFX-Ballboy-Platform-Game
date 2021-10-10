@@ -46,7 +46,7 @@ public interface Entity {
      * The set of available layers
      */
     enum Layer{
-        BACKGROUND, FOREGROUND, EFFECT, MIDGROUND
+        BACKGROUND, FOREGROUND, EFFECT, MIDGROUND, FINISH
     }
 
 }

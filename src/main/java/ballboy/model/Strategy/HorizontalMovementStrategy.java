@@ -43,4 +43,9 @@ public class HorizontalMovementStrategy implements MovementStrategy {
 
 
     }
+
+    @Override
+    public void collide(Entity thisEntity , Entity collisionEntity, LevelDao levelDao) {
+
+    }
 }

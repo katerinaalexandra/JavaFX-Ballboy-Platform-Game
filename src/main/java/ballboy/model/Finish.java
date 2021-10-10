@@ -13,7 +13,9 @@ public class Finish extends StationaryEntity {
         extractConfig(config);
         setDimensions(50,50);
 
-        this.layer=Layer.MIDGROUND;
+        System.out.println("Finish obj generated.");
+
+        this.layer=Layer.FINISH;
     }
 
     public void setDimensions(double height, double width) {

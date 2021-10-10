@@ -74,16 +74,6 @@ public class LevelBuilder {
         return entityFactoryRegistry.addEntity(entityConfig);
     }
 
-    public void spawnCloud(JSONObject cloudConfig) {
-        try {
-            Entity cloud = createEntity(cloudConfig);
-            this.level.entities.add(cloud);
-            System.out.println("Cloud spawned");
-        } catch (Exception e) {
-            System.out.println("Something went wrong with the Cloud creation!");
-        }
-    }
-
     public LevelImpl build() {return this.level;}
 
 

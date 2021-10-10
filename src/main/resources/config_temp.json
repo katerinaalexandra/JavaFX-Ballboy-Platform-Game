@@ -7,7 +7,7 @@
       "size": "normal",
       "movement": "ballboy",
       "startingX": 20.0,
-      "startingY": 200.0,
+      "startingY": 100.0,
       "imagePath": "ch_stand1.png"
     },
     "Entities": [{
@@ -31,42 +31,36 @@
       "startingX": 400.0,
       "startingY" : 200.0,
       "imagePath": "foot_tile.png"
-    },{
+    },,{
       "type": "wall",
       "size": "small",
       "movement": "default",
       "startingX": 500.0,
       "startingY" : 100.0,
       "imagePath": "foot_tile.png"
-    }, {
-      "type": "cloud",
-      "movement": "cloud",
-      "startingX": 650.0,
-      "startingY": 100.0,
-      "cloudVelocity": 5.2,
-      "imagePath": "cloud_1.png"
-    }, {
-      "type": "cloud",
-      "movement": "cloud",
-      "startingX": 200.0,
-      "startingY": 200.0,
-      "cloudVelocity": 5.2,
-      "imagePath": "cloud_1.png"
     }
     ],
     "Finish" : {
       "type": "finish",
       "movement": "default",
-      "startingX": 640.0,
+      "startingX": 1000.0,
       "startingY": 200.0,
       "imagePath": "tree.png"
+    },
+    "Clouds": {
+      "type": "cloud",
+      "movement": "cloud",
+      "startingX": 650.0,
+      "startingY": 400.0,
+      "cloudVelocity": 5.2,
+      "imagePath": "cloud_1.png"
     },
     "LevelDimensions": {
       "floorHeight": 300.0,
       "height": 400.0,
       "width": 640.0,
       "floorColour": "SLATEBLUE",
-      "gravity": 4.0
+      "gravity": 9.8
     }
   }
 }

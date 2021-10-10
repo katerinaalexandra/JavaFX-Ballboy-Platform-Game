@@ -9,4 +9,9 @@ public class NoMovementStrategy implements MovementStrategy {
     public void move(Entity entity, LevelDao levelDao) {
 
     }
+
+    @Override
+    public void collide(Entity thisEntity, Entity collisionEntity, LevelDao levelDao) {
+
+    }
 }

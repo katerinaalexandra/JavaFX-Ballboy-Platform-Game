@@ -66,7 +66,7 @@ public class GameWindow {
         }
 
         double heroXPos = model.getCurrentLevel().getHeroX();
-        System.out.println(heroXPos);
+        //System.out.println(heroXPos);
         heroXPos -= xViewportOffset;
 
         if (heroXPos < VIEWPORT_MARGIN) {
@@ -81,7 +81,7 @@ public class GameWindow {
         }
 
         // We'll never move up and down, will we?
-        backgroundDrawer.update(xViewportOffset, 0);
+        backgroundDrawer.update(xViewportOffset, yViewportOffset);
 
         for (Entity entity: entities) {
             boolean notFound = true;

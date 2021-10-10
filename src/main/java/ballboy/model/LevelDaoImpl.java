@@ -5,6 +5,7 @@ public class LevelDaoImpl implements LevelDao {
     public double width;
     public double height;
     public double gravity;
+    public double timestep=0.017;
 
     @Override
     public double getFloorHeight() {
@@ -27,6 +28,6 @@ public class LevelDaoImpl implements LevelDao {
     }
 
     @Override
-    public double getTimestep() {return 0.017;}
+    public double getTimestep() {return timestep;}
 
 }

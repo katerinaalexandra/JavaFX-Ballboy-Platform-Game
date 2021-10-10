@@ -6,4 +6,6 @@ import ballboy.model.LevelDao;
 
 public interface MovementStrategy {
     void move(Entity entity, LevelDao levelDao);
+
+    void collide(Entity thisEntity, Entity collisionEntity, LevelDao levelDao);
 }

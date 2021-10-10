@@ -12,6 +12,7 @@ public class LevelImpl implements Level {
     public String floorColour;
     public int tick;
     public JSONObject cloudConfig;
+    public double xAcceleration;
 
     // Entity attributes
     public List<Entity> entities;
@@ -39,11 +40,12 @@ public class LevelImpl implements Level {
     public void tick() {
         for (Entity entity: this.getEntities()) {
             entity.tick(this.levelDao);
+
+            if (checkCollision(hero, entity)) {
+
+                hero.movementStrategy.collide(hero, entity, levelDao);
+            }
         }
-    }
-
-    public void cloudSpawner() {
-
     }
 
     @Override
@@ -63,28 +65,63 @@ public class LevelImpl implements Level {
 
     @Override
     public boolean boostHeight() {
-        return false;
+        double currentAcceleration = hero.getYAcceleration();
+        hero.setYAcceleration(currentAcceleration+1);
+        return true;
     }
 
     @Override
     public boolean dropHeight() {
-        return false;
+        double currentVel = hero.getYVel();
+        hero.setYVel(currentVel-levelDao.getTimestep());
+        return true;
     }
 
     @Override
     public boolean moveLeft() {
-        hero.setXPos(hero.getXPos()-5);
-        System.out.println(hero.getXPos());
+        double xVel = hero.getXVel();
+        xVel += levelDao.getTimestep();
+
+        hero.setXPos(hero.getXPos() - (xVel + 0.5*xAcceleration));
+        hero.setXVel(xVel);
+
         return true;
     }
 
     @Override
     public boolean moveRight() {
-        hero.setXPos(hero.getXPos()+5);
-        System.out.println(hero.getXPos());
+        double xVel = hero.getXVel();
+        xVel += levelDao.getTimestep();
+
+        hero.setXPos(hero.getXPos() + (xVel + 0.5*xAcceleration));
+        hero.setXVel(xVel);
+
+        return true;
+    }
+
+    public boolean resetXVel() {
+        hero.setXVel(0);
         return true;
     }
 
     public String getFloorColour() { return floorColour;}
+
+    public boolean checkCollision(Ballboy hero, Entity entity) {
+        if (hero.equals(entity)) {
+            return false;
+        }
+
+        if (entity.getLayer().equals(Entity.Layer.BACKGROUND)) {
+            return false;
+        }
+
+
+        return (hero.getXPos() < (entity.getXPos() + (entity.getWidth())) &&
+                ((hero.getXPos() + hero.getWidth()) > entity.getXPos()) &&
+                hero.getYPos() < (entity.getYPos() + (entity.getHeight())) &&
+                ((hero.getYPos() + hero.getHeight()) > entity.getYPos()));
+
+
+    }
 
 }

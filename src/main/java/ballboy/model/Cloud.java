@@ -9,7 +9,7 @@ public class Cloud extends MovingEntity {
 
         this.movementStrategy=movementStrategy;
 
-        this.layer=Layer.FOREGROUND;
+        this.layer=Layer.BACKGROUND;
 
         extractConfig(config);
         setDimensions(100,100);

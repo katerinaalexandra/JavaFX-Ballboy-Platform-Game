@@ -25,17 +25,17 @@ public abstract class StationaryEntity implements Entity {
 
     @Override
     public double getXPos() {
-        return 0;
-    }
-
-    @Override
-    public double getYPos() {
         return xPos;
     }
 
     @Override
-    public double getHeight() {
+    public double getYPos() {
         return yPos;
+    }
+
+    @Override
+    public double getHeight() {
+        return height;
     }
 
     @Override

@@ -12,6 +12,8 @@ public class Wall extends StationaryEntity {
         extractConfig(config);
         setDimensions(40,40);
 
+        System.out.println(this.getWidth());
+
         this.layer=Layer.MIDGROUND;
     }
 
